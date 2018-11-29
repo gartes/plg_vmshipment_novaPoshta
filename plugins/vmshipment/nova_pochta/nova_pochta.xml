@@ -19,9 +19,7 @@
         <filename plugin="nova_pochta">script.php</filename>
     </files>
 
-    <config>
-
-    </config>
+    <config></config>
 
     <vmconfig>
         <fields name="params">
