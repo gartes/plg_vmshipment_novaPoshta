@@ -1,0 +1,327 @@
+/**
+PLG - vmshipment nova_pochta OrderEdit
+/vmshipment/nova_pochta/nova_pochta/assets/css/novaPoshtaOrderEdit.css
+
+ */
+#tablePlg{
+    float: left;
+    width: 100%;
+}
+#tablePlg div{
+    /* margin: 0; */
+    /* padding: 0; */
+}
+
+#nova_pochta_InternetDocument_TypeDocument {
+    font-size: 9px;
+    width: 80px;
+}
+
+#nova_pochta_InternetDocument_TypeDocument-lbl {
+    width: 71px;
+    font-size: 9px;
+}
+
+.InternetDocument .controls {
+    float: left;
+}
+
+.InternetDocument .control-label {
+    width: auto;
+}
+
+#nova_pochta_VolumeGeneralParams_SizeUnits {
+    width: 100px;
+}
+
+#tablePlg div.row {
+    float: left;
+    width: 100%;
+}
+
+#NovaPoshta_edit .blk{
+    float: left;
+    border: 1px solid #ccc;
+    /* padding: 5px; */
+    /* width: 92.9%; */
+}
+#Recipient_data.blk,
+div#Recipient_city.blk {
+    /* padding: 0 1px; */
+    min-height: 210px;
+}
+#NovaPoshta_edit fieldset{
+    border: none;
+    margin: 0 auto;
+    margin-left: 0px;
+}
+
+fieldset#nova_pochta_ServiceType {
+    /* width: 100%; */
+}
+#NovaPoshta_edit .controls .btn-group.btn-group-yesno > .btn{
+    margin: 0;
+}
+
+div#Recipient_city .control-label {float: left;width: 130px;}
+
+div#Recipient_city .controls {
+    float: left;
+}
+#NovaPoshta_edit .control-group{
+    margin: 0px 5px;
+    display: block;
+    width: 100%;
+    float: left;
+}
+
+#RecipientServiceType_data .control-group {
+    float: left;
+    position: relative;
+    width: auto;
+}
+
+#RecipientServiceType_data .control-group:nth-child(2) {
+    width: 95%;
+    margin-bottom: 10px;
+}
+#RecipientServiceType_data .control-group .control-label{
+    position: absolute;
+    top: 26px;
+}
+#RecipientServiceType_data .control-group .control-label label{
+    font-size: 10px;
+    font-weight: 600;
+    color: #7f7f7f;
+}
+
+#RecipientServiceType_data.blk{
+    min-height: 244px;
+}
+#RecipientServiceType_data .control-group .control-label{
+    width: 100px;
+    padding: 0;
+}
+#RecipientServiceType_data .control-group:nth-child(3){
+    width: 100%;
+}
+#RecipientServiceType_data .control-group:nth-child(3) .control-label{
+    width: 100%;
+    padding: 0;
+}
+#Order_params .control-group:nth-child(2) {
+    margin-bottom: 10px;
+}
+#Order_params .control-group:nth-child(2) .control-label {
+    display: none;
+}
+#NovaPoshta_edit .InternetDocument .control-group:first-child,
+#NovaPoshta_edit .control-group:first-child {
+    width: calc(100% - 1px);
+    float: left;
+    margin: 0px 1px;
+    /* border: 1px solid #ccc; */
+}
+#NovaPoshta_edit div:nth-child(1) > div.alert{
+    border-radius: 0;
+}
+
+#NovaPoshta_edit .blk:nth-child(even){
+    /* margin-left: 10px; */
+}
+div#RecipientBackwardDelivery_data .controls,
+div#RecipientServiceType_data .controls {
+    float: left;
+}
+div#RecipientServiceType_data .controls input{
+    width: auto;
+    font-size: 11px;
+}
+div#RecipientBackwardDelivery_data .control-label,
+div#RecipientServiceType_data .control-label {
+    float: left;
+    width: 116px;
+    padding: 0 5px;
+}
+
+#nova_pochta_PayerType{
+    width: 125px;
+}
+#CityRecipient {
+    width: 90%;
+    margin-left: 10px;
+}
+#NovaPoshta_edit .blk-line{
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#nova_pochta_VolumeGeneralParamsList_button {
+    font-size: 10px;
+}
+
+.InternetDocument.blk-line {
+    border: 1px solid #ccc;
+}
+
+.InternetDocument.blk-line label {
+    font-weight: 600;
+    font-size: 10.3px;
+    line-height: 12px;
+}
+
+.InternetDocument.blk-line input {
+    text-align: center;
+    font-weight: 600;
+}
+#NovaPoshta_edit .InternetDocument .control-group {
+    float: left;
+    width: auto;
+}
+
+#NovaPoshta_edit .InternetDocument .control-group:nth-child(5),
+#NovaPoshta_edit .InternetDocument .control-group:nth-child(6) {
+    width: 50% !important;
+    margin: 0;
+}
+#NovaPoshta_edit .InternetDocument .control-group:nth-child(5) label,
+#NovaPoshta_edit .InternetDocument .control-group:nth-child(6) label,
+#NovaPoshta_edit .InternetDocument .control-group:nth-child(6) .control-label{
+    width: 100%;
+}
+#NovaPoshta_edit .InternetDocument .control-group:nth-child(5) .control-label,
+#NovaPoshta_edit .InternetDocument .control-group:nth-child(6) .control-label,
+#NovaPoshta_edit .InternetDocument .control-group:nth-child(5) .controls,
+#NovaPoshta_edit .InternetDocument .control-group:nth-child(6) .controls{
+    margin-left: 10px;
+}
+#Recipient_City .control-label {
+    width: auto;
+}
+
+#nova_pochta_InternetDocument_EstimatedDeliveryDate-lbl {
+    width: 71px;
+}
+
+#nova_pochta_InternetDocument_EstimatedDeliveryDate {
+    width: 65px;
+}
+
+#nova_pochta_InternetDocument_CostOnSite-lbl {
+    width: 54px;
+}
+
+#nova_pochta_InternetDocument_CostOnSite {
+}
+input#nova_pochta_InternetDocument_Ref {
+    font-size: 9px;
+    width: 180px;
+}
+.InternetDocument.blk-line input {
+    width: auto;
+}
+
+input#nova_pochta_InternetDocument_Ref {
+    font-size: 9px;
+    width: 180px;
+}
+
+#nova_pochta_InternetDocument_IntDocNumber-lbl {
+    width: 86px;
+}
+
+label#nova_pochta_InternetDocument_Ref-lbl {
+    width: 123px;
+    font-size: 9px;
+}
+
+#nova_pochta_InternetDocument_IntDocNumber {
+    font-size: 20px;
+    text-align: center;
+    font-weight: 600;
+    padding: 2px 4px;
+    width: 159px;
+    height: 27px;
+    color: #9e4c3f;
+}
+
+#Recipient_City .controls {
+    float: left;
+}
+
+#Recipient_City input {
+    width: auto;
+    /* text-align: center; */
+}
+div#Order_params .control-label {
+    width: 155px;
+}
+
+div#BackwardDelivery_Adress .control-group {
+    /* height: 50px; */
+    /* margin: 0px 0px 5px 0px; */
+    /* border-bottom: 1px solid #ccc; */
+    /* padding: 0 5px; */
+}
+
+div#BackwardDelivery_Adress .control-group input[type=text] {
+    width: auto;
+}
+
+div#Order_params {
+    border: 1px solid #ccc;
+    /* padding: 4px; */
+}
+#NovaPoshta_edit .formBlk{
+    float: left;
+    width: 100%;
+}
+
+div#formNp_footer {
+    padding: 5px;
+    border-top: 1px solid #ccc;
+}
+
+#Recipient_data{
+
+
+}
+div#Recipient_data .controls,
+div#Recipient_data .control-label{
+    float: left;
+}
+div#Recipient_data .control-label {
+    width: 65px;
+}
+
+div#Recipient_data .controls{}
+
+div#Recipient_data input {
+    /* width: 115px; */
+}
+#nova_pochta_VolumeGeneralParamsList_container th{
+    text-align: center;
+}
+#nova_pochta_VolumeGeneralParamsList_container input,
+#Order_params input{
+    width: auto;
+    text-align: center;
+}
+.stritAutocomplete {width: 230px !important;height: auto;max-height: 200px;overflow-y: auto;}
+.stritAutocomplete li{
+    width: 100%;
+    float: left;
+    padding: 2px;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.stritAutocomplete li a {
+    width: 100%;
+    display: block;
+}
+
+.stritAutocomplete li:nth-child(even) {
+    background: #f3f3f3bf;
+}

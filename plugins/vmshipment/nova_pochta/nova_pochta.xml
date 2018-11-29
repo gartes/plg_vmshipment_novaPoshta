@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension version="3.0" type="plugin" group="vmshipment" method="upgrade">
+    <name>nova_pochta</name>
+    <creationDate>27.11.2018</creationDate>
+    <author>Gartes</author>
+    <authorUrl>http://www.nova_pochta.XXX</authorUrl>
+    <copyright>Copyright (C) 2004-2018 Virtuemart Team. All rights reserved.</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <version>4.1.9</version>
+    <description>PLG shipment Nova Pochta</description>
+    <files>
+        <folder>css</folder>
+        <folder>elements</folder>
+        <folder>Images</folder>
+        <folder>language</folder>
+        <folder>nova_pochta</folder>
+        <filename plugin="nova_pochta">index.html</filename>
+        <filename plugin="nova_pochta">nova_pochta.php</filename>
+        <filename plugin="nova_pochta">script.php</filename>
+    </files>
+
+    <config>
+
+    </config>
+
+    <vmconfig>
+        <fields name="params">
+            <fieldset name="restrictions" addfieldpath="/plugins/vmshipment/nova_pochta/elements">
+                <!-- Заголовок блока полей -->
+
+
+                <!--<field name="np_language" type="languagenp" default="ru" label="VMSHIPMENT_NP_LANGUAG" description="VMSHIPMENT_NP_LANGUAG_DESC" />-->
+                <!--default="a6d4b9d639639df43d334f43b483866f"-->
+
+
+                <!-- Ключ API  --><!-- default="1c8c1c073415a661cdee2915d3ffc533" -->
+                <field name="keyAPI" type="text" size="25" label="VMSHIPMENT_NP_KEY_PRIVAT_NP"
+                       description="VMSHIPMENT_NP_KEY_PRIVAT_NP_DESC"/>
+                <!-- Срок действия ключа -->
+                <field name="validity_key" type="calendar" default="" label="VMSHIPMENT_NP_VALIDITY_KEY"
+                       format="%Y-%m-%d"/>
+
+
+                <!-- Заголовок блока полей ДАННЫЕ ОТПРАВИТЕЛЯ -->
+                <field class="level1" type="vmtitle" default="VMSHIPMENT_NP_SENDER_PARAMS"/>
+                <!-- Город отправителя -->
+                <field name="CitySender" type="npcityelement" label="VMSHIPMENT_NP_CITY_OF_SENDER"
+                       description="VMSHIPMENT_NP_CITY_OF_SENDER_DESC"
+                       onchange="NP_MethodEdit.Change.CitySender(event)"/>
+
+                <!-- Склад отправителя -->
+                <field name="SenderAddress" type="npwarehauselement" label="VMSHIPMENT_NP_SENDER_ADDRESS"
+                       description="VMSHIPMENT_NP_SENDER_ADDRESS_DESC"
+                       onchange="NP_MethodEdit.Change.WarehousesSender(event);"/>
+
+
+                <!-- Ф.И.О отправителя  -->
+                <field name="SenderCounterpartyText" disabled="1" type="text" size="25"
+                       label="VMSHIPMENT_NP_SENDER_FIO"/>
+                <!-- Контактное лицо -->
+                <field name="SenderContactText" disabled="1" type="text" size="25"
+                       label="VMSHIPMENT_NP_SENDER_CONTACT_TEXT"/>
+                <!-- Телефон отправителя -->
+                <field name="SenderContactPhoneText" disabled="1" type="text" size="25"
+                       label="VMSHIPMENT_NP_SENDER_FONE_TEXT"/>
+
+                <!-- Идентификатор отправителя -->
+                <field label="" class="hidden" name="Sender" type="Hidden"/>
+                <!--Идентификатор контактного лица отправителя -->
+                <field label="" class="hidden" name="ContactSender" type="Hidden"/>
+
+
+                <!-- Описания груза -->
+                <field class="level1" type="vmtitle" default="VMSHIPMENT_NP_VMTITLE_CARGO_DESCRIPTION"/>
+                <field name="CargoType" type="cargotype" default="Parcel" label="VMSHIPMENT_NP_CARGO_TYPE"
+                       description="VMSHIPMENT_NP_CARGO_TYPE_DESC"/>
+
+                <!-- Технология доставки -->
+
+                <field name="ServiceType" type="servicetype" default="WarehouseWarehouse"
+                       label="VMSHIPMENT_NP_DELIVERY TECHNOLOGY"
+                       description="VMSHIPMENT_NP_DELIVERY TECHNOLOGY_DESC"/>
+
+                <!-- Виды плательщиков услуги доставки -->
+                <field name="PayerType" type="payertype" default="Recipient" label="VMSHIPMENT_PAYER_TYPE"
+                       description="VMSHIPMENT_PAYER_TYPE_DESC"/>
+
+                <!--Формы оплаты -->
+                <field name="PaymentMethod" type="list" default="Cash"
+                       label="VMSHIPMENT_NP_PAYMENT_METHOD"
+                       description="VMSHIPMENT_NP_PAYMENT_METHOD_DESC">
+                    <option value="Cash">VMSHIPMENT_NP_PAYMENT_METHOD_CASH</option>
+                    <option value="NonCash">VMSHIPMENT_NP_PAYMENT_METHOD_NONCASH</option>
+                </field>
+
+                <field name="free_shipment" type="text" default="" size="25" label="VMSHIPMENT_NP_FREE_SHIPMENT"
+                       description="VMSHIPMENT_NP_FREE_SHIPMENT_DESC"/>
+
+
+                <!-- Пераметры отправления по умолчанию -->
+                <field class="level1" type="vmtitle" default="VMSHIPMENT_NP_ORDER_PARAMS_OPTIONS_DEF"/>
+
+                <!-- Вес фактический -->
+                <field name="DEF_Weight" type="text" default="0.1" size="25" label="VMSHIPMENT_NP_ORDER_PARAMS_WEIGHT"
+                       description="VMSHIPMENT_NP_ORDER_PARAMS_WEIGHT_DESC"/>
+
+                <!-- Единицы измерения размеров Ширина х Высота х Длина  -->
+                <field name="DEF_SizeUnits" type="list" default="0.01"
+                       label="VMSHIPMENT_NP_ORDER_PARAMS_DEF_SIZE_UNITS"
+                       description="VMSHIPMENT_NP_ORDER_PARAMS_DEF_SIZE_UNITS_DESC">
+                    <option value="0.001">VMSHIPMENT_NP_ORDER_PARAMS_DEF_SIZE_UNITS_MILLIMETERS</option>
+                    <option value="0.01">VMSHIPMENT_NP_ORDER_PARAMS_DEF_SIZE_UNITS_CENTIMETERS</option>
+                    <option value="1">VMSHIPMENT_NP_ORDER_PARAMS_DEF_SIZE_UNITS_METERS</option>
+                </field>
+
+
+                <!--Объем общий, м.куб -->
+                <field name="VolumeGeneral" class="hidden" type="Hidden" default="0.0004" label=""/>
+
+
+                <!-- Услуги обратной доставки -->
+                <field class="level1" type="vmtitle" default="VMSHIPMENT_NP_BACKWARD_DELIVERY_DATA_OPTIONS"/>
+                <!-- Виды плательщиков обратной доставки -->
+                <field name="BackwardDeliveryPayerType" type="payertype" default="Recipient"
+                       label="VMSHIPMENT_BACKWARD_DELIVERY_PAYER_TYPE"
+                       description="VMSHIPMENT_BACKWARD_DELIVERY_PAYER_TYPE_DESC"/>
+                <!-- Тип обратной доставки -->
+                <field name="BackwardDeliveryCargoType" type="list" default="Money"
+                       label="VMSHIPMENT_NP_BACKWARD_DELIVERY_CARGO_TYPE">
+                    <option value="Money">VMSHIPMENT_NP_BACKWARD_DELIVERY_CARGO_TYPE_MONEY</option>
+                </field>
+
+
+                <field class="level1" type="vmtitle" default="VMSHIPMENT_NP_FIELD_RELATIONS_USER"/>
+
+
+                <field name="Recipient_LastName_fild"
+                       type="npvmListTable"
+                       default=""
+                       model="Userfields"
+                       func='getUserFields'
+                       lvalue="name"
+                       ltext="title"
+                       placeholder="VMSHIPMENT_NP_USER_FIELD_PLACEHOLDER"
+                       label="VMSHIPMENT_NP_RECIPIENT_LASTNAME_FILD"
+                       multiple="false"
+                       description="VMSHIPMENT_NP_RECIPIENT_LASTNAME_FILD_DESC"/>
+
+                <field name="UseFioField" type="radio" default="0"
+                       label="VMSHIPMENT_NP_USE_FIO_FIELD"
+                       description=""
+                       class="btn-group btn-group-yesno">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+
+
+                <field name="Recipient_FirstName_fild"
+                       type="npvmListTable"
+                       default=""
+                       model="Userfields"
+                       func='getUserFields'
+                       lvalue="name"
+                       ltext="title"
+                       showon="UseFioField:0"
+                       placeholder="VMSHIPMENT_NP_USER_FIELD_PLACEHOLDER"
+                       label="VMSHIPMENT_NP_RECIPIENT_FIRST_NAME_FILD"
+                       multiple="false"
+                       description="VMSHIPMENT_NP_RECIPIENT_FIRST_NAME_FILD_DESC"/>
+
+                <field name="Recipient_MiddleName_fild"
+                       type="npvmListTable"
+                       default=""
+                       model="Userfields"
+                       func='getUserFields'
+                       lvalue="name"
+                       ltext="title"
+                       showon="UseFioField:0"
+                       placeholder="VMSHIPMENT_NP_USER_FIELD_PLACEHOLDER"
+                       label="VMSHIPMENT_NP_RECIPIENT_MIDDLE_NAME_FILD"
+                       multiple="false"
+                       description="VMSHIPMENT_NP_RECIPIENT_MIDDLE_NAME_FILD_DESC"/>
+
+
+                <field name="Recipient_Phone_fild"
+                       type="npvmListTable"
+                       default=""
+                       model="Userfields"
+                       func='getUserFields'
+                       lvalue="name"
+                       ltext="title"
+                       placeholder="VMSHIPMENT_NP_USER_FIELD_PLACEHOLDER"
+                       label="VMSHIPMENT_NP_RECIPIENT_PHONE_FILD"
+                       multiple="false"
+                       description="VMSHIPMENT_NP_RECIPIENT_PHONE_FILD_DESC"/>
+
+                <field name="Recipient_Email_fild"
+                       type="npvmListTable"
+                       default=""
+                       model="Userfields"
+                       func='getUserFields'
+                       lvalue="name"
+                       ltext="title"
+                       placeholder="VMSHIPMENT_NP_USER_FIELD_PLACEHOLDER"
+                       label="VMSHIPMENT_NP_RECIPIENT_EMAIL_FILD"
+                       multiple="false"
+                       description="VMSHIPMENT_NP_RECIPIENT_EMAIL_FILD_DESC"/>
+
+
+                <field class="level1" type="vmtitle" default="VMSHIPMENT_NP_TEMLATE_SETTING_OPTIONS"/>
+                <field name="css_class_blk" type="text" default="novaPoshtaLoayot"
+                       label="VMSHIPMENT_NP_TEMLATE_SETTING_CSS_CLS_DATA"/>
+
+                <!--    <field name="FirstName" type="vmuserfields" default="" label="VMSHIPMENT_NP_FIELDS_FIRST_NAME" />-->
+
+                <!--<field name="virtuemart_shipmentmethod_ids" type="vmListTable"
+                       default=""
+                       model="Userfields"
+                       func = 'getUserFields'
+
+                       lvalue="name"
+                       ltext="title"
+
+                       label="VMPAYMENT_PAYPAL_FOR_SHIPMENTS"
+                       multiple="false"
+                       description="VMPAYMENT_PAYPAL_FOR_SHIPMENTS_TIP"/>-->
+
+
+                <!---->
+
+
+                <!-- ======================== ======================== ======================== ======================== ========================
+                ======================== ======================== ======================== ======================== ======================== ======================== ========================
+                ======================== ======================== ======================== ======================== ======================== ======================== ========================
+                ======================== ======================== ======================== ======================== ======================== ======================== ========================
+                ======================== ======================== ======================== ======================== ======================== -->
+
+
+                <!--<field name="adres_dveri" type="text" size="40"
+                    label="VMSHIPMENT_NP_SENDER_ADDRESS" description="VMSHIPMENT_NP_ADRES_DVERI_DESC" />-->
+
+
+                <!--
+
+
+                                <field name="time_avto" type="text" size="10" default="15"
+                                    label="VMSHIPMENT_NP_TIME_AVTO" description="VMSHIPMENT_NP_TIME_AVTO_DESC" />
+
+                                <field name="Order_States" type="vmorderstate"
+                                    label="VMSHIPMENT_NP_ORDER_STATE" description="VMSHIPMENT_NP_ORDER_STATE_DESC" />
+
+
+
+
+
+
+                    <field name="variant_delivery_select_np" type="radio" default="0" label="VMSHIPMENT_VARIANT_DELIVERY_SELECT_NP" description="VMSHIPMENT_VARIANT_DELIVERY_SELECT_NP_DESC">
+                          <option value="0">COM_VIRTUEMART_YES</option>
+                          <option value="1">COM_VIRTUEMART_NO</option>
+                    </field>
+
+                    <field name="cost_delivery_select_np" type="radio" default="0" label="VMSHIPMENT_COST_DELIVERY_SELECT_NP" description="VMSHIPMENT_COST_DELIVERY_SELECT_NP_DESC">
+                          <option value="0">COM_VIRTUEMART_YES</option>
+                          <option value="1">COM_VIRTUEMART_NO</option>
+                    </field>
+
+                    <field name="mest_default" type="text" size="10" default="1" label="VMSHIPMENT_MEST_DEFAUL" description="VMSHIPMENT_MEST_DEFAUL_DESC"/>
+
+                    <field name="weight_min_for_np" type="text" size="10" default="1.6" label="VMSHIPMENT_MIN_WEIGHT_FOR_NP" description="VMSHIPMENT_MIN_WEIGHT_FOR_NP_DESC"/>
+
+
+
+
+                    <field name="public_pricet_min_for_np" type="text" size="10" default="400" label="VMSHIPMENT_MIN_PUBLIC_PRICET_FOR_NP" description="VMSHIPMENT_MIN_PUBLIC_PRICET_FOR_NP_DESC"/>
+
+                                <field name="id_city_field" type="text" size="40"
+                                    default="city_field"
+                                    label="VMSHIPMENT_ID_FIELD_CITY"
+                                    description="VMSHIPMENT_ID_FIELD_CITY_DESC" />
+
+                                <field name="id_last_field" type="text" size="40"
+                                    default="last_name_field"
+                                    label="VMSHIPMENT_ID_FIELD_LAST"
+                                    description="VMSHIPMENT_ID_FIELD_LAST_DESC" />
+
+                                <field name="id_first_field" type="text" size="40"
+                                    default="last_name_field"
+                                    label="VMSHIPMENT_ID_FIELD_FIRST"
+                                    description="VMSHIPMENT_ID_FIELD_FIRST_DESC" />
+
+                                 <field name="id_middle_field" type="text" size="40"
+                                    default="middle_name_field"
+                                    label="VMSHIPMENT_ID_FIELD_MIDDLE"
+                                    description="VMSHIPMENT_ID_FIELD_MIDDLE_DESC" />
+
+                                <field name="id_tel_field" type="text" size="40"
+                                    default="phone_1_field"
+                                    label="VMSHIPMENT_ID_FIELD_TEL"
+                                    description="VMSHIPMENT_ID_FIELD_TEL_DESC" />
+
+
+
+                    <field name="time_cech_for_np" type="text" size="10" default="604800" label="TIME_CESH_FOR_NP" description="TIME_CESH_FOR_NP_DESC"/>
+
+                    <field name="weight_unit" type="vmweightunit" size="10" default="" label="VMSHIPMENT_WEIGHT_COUNTRIES_WEIGHT_UNIT" description="VMSHIPMENT_WEIGHT_COUNTRIES_WEIGHT_UNIT_DESC"/>
+
+                    <field name="package_fee" type="text" label="VMSHIPMENT_WEIGHT_COUNTRIES_PACKAGE_FEE"
+                               description="VMSHIPMENT_WEIGHT_COUNTRIES_PACKAGE_FEE_DESC"/>
+                                -->
+
+            </fieldset>
+        </fields>
+    </vmconfig>
+
+    <updateservers>
+        <!-- Заметка: Не допускается пробелов или переносов строк между тэгам server -->
+        <server type="extension" priority="1" name="Сайт обновления плагина доставки Новая Почта">
+            <!--http://dew.dom-sad.net/update/nova_pochta-update.xml-->
+        </server>
+    </updateservers>
+</extension>
+
+
+        <!-- Запускается при установке/удалении/обновлении -->
+        <!--<scriptfile>script.php</scriptfile>-->
+        <!-- Запускается при установке -->
+        <!--<install>
+            <sql>
+                <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+            </sql>
+        </install>-->
+        <!-- Запускается при обновлении -->
+        <!--<update>
+            <schemas>
+                <schemapath type="mysql">sql/updates/mysql</schemapath>
+            </schemas>
+        </update>-->
+        <!-- Запускается при удалении -->
+        <!--<uninstall>
+             <sql>
+                 <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+             </sql>
+        </uninstall>-->
+
+        <!--<media folder="images" destination="../images/stories/virtuemart/shipment">
+            <filename>Images/mootree_loader.gif</filename>
+            <filename>Images/New_logo.png</filename>
+        </media>-->
+
+
+        <!--<params addpath="/plugins/vmshipment/nova_pochta/elements"> -->
+        <!--<param type="vmjpluginwarning" />-->
+
+
+        <!--
+
+
+
+
+
+
+
+
+<param type="spacer" default="VMSHIPMENT_NP_STANDART_PARAMETRS" />
+<param name="countries" type="vmcountries"  scope="com_virtuemart" default="" label="VMSHIPMENT_WEIGHT_COUNTRIES_COUNTRIES" description="VMSHIPMENT_WEIGHT_COUNTRIES_COUNTRIES_DESC"/>
+<param name="nbproducts_start" type="text" size="10" default="1" label="VMSHIPMENT_WEIGHT_COUNTRIES_NBPRODUCTS_START" description="VMSHIPMENT_WEIGHT_COUNTRIES_NBPRODUCTS_START_DESC"/>
+<param name="nbproducts_stop" type="text" size="10" default="" label="VMSHIPMENT_WEIGHT_COUNTRIES_NBPRODUCTS_STOP" description="VMSHIPMENT_WEIGHT_COUNTRIES_NBPRODUCTS_STOP_DESC"/>
+
+
+<param name="orderamount_start" type="text" size="10" default="" label="VMSHIPMENT_WEIGHT_COUNTRIES_ORDERAMOUNT_START" description="VMSHIPMENT_WEIGHT_COUNTRIES_ORDERAMOUNT_START_DESC"/>
+    <param name="orderamount_stop" type="text" size="10" default="" label="VMSHIPMENT_WEIGHT_COUNTRIES_ORDERAMOUNT_STOP" description="VMSHIPMENT_WEIGHT_COUNTRIES_ORDERAMOUNT_STOP_DESC"/>
+
+
+
+
+
+    <param name="cost" type="text"   label="VMSHIPMENT_WEIGHT_COUNTRIES_COST" description="VMSHIPMENT_WEIGHT_COUNTRIES_COST_DESC" />
+    <param name="package_fee" type="text"   label="VMSHIPMENT_WEIGHT_COUNTRIES_PACKAGE_FEE" description="VMSHIPMENT_WEIGHT_COUNTRIES_PACKAGE_FEE_DESC" />
+
+<param name="free_shipment" type="text"    label="VMSHIPMENT_WEIGHT_COUNTRIES_FREE_SHIPPING_AMOUNT" description="VMSHIPMENT_WEIGHT_COUNTRIES_FREE_SHIPPING_AMOUNT_DESC" />	-->
+
+        <!--<param name="time_server" type="timeserver"  default="0" label="VMSHIPMENT_NP_TIME_SERVER" description="VMSHIPMENT_NP_TIME_SERVER_DESC" />
+            -->
+        <!--<param	name="shipment_logos" type="vmfiles" label="VMSHIPMENT_WEIGHT_COUNTRIES_LOGOS"
+                     description="VMSHIPMENT_WEIGHT_COUNTRIES_LOGOS_DESC"
+                     directory="/images/stories/virtuemart/shipment"
+                     default="NovaPoshta.png" hide_default="1" hide_none="1"
+                     stripext="0"   exclude="^_" />-->
+
+
+        <!--
+
+
+        <field name="test" type="spacer" class="some_class" hr="true" />
+        <param type="spacer" default="VMSHIPMENT_NP_PARAM_SMS_INFORMIROVANIA"  />
+
+        <param name="alfaNameApiSms" type="text"    label="VMSHIPMENT_ALFANAME_SMS_CENTR" description="" />
+
+        <param name="loginApiSms" type="text"    label="VMSHIPMENT_LOGIN_SMS_CENTR" description="" />
+
+        <param name="paswordApiSms" type="text" label="VMSHIPMENT_PASW_SMS_CENTR" description="" />
+
+
+        <param name="addTextSms" type="textarea" cols="3" rows="3" label="VMSHIPMENT_ADD_SMS_TEXT" />
+
+
+
+        -->
+	

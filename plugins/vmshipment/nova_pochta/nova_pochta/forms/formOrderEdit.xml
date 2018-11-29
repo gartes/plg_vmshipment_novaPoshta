@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <!-- addfieldpath="/plugins/vmshipment/nova_pochta/elements" -->
+
+
+    <fieldset name="InternetDocument_data">
+        <fields name="nova_pochta">
+            <fields name="InternetDocument">
+                <field name="note_InternetDocument_data" type="note" class="alert alert-info"
+                       label="VMSHIPMENT_NP_NOTE_INTERNET_DOCUMENT_DATA"/>
+
+                <field name="CostOnSite"
+                       type="text"
+                       readonly="1"
+                       size="3"
+                       label="VMSHIPMENT_NP_INTERNET_DOCUMENT_COST_ON_SITE"/>
+                <field name="EstimatedDeliveryDate"
+                       type="text"
+                       readonly="1"
+                       size="8"
+                       label="VMSHIPMENT_NP_INTERNET_DOCUMENT_ESTIMATED_DELIVERY_DATE"/>
+                <field name="IntDocNumber"
+                       type="text"
+                       readonly="1"
+                       size="13"
+                       label="VMSHIPMENT_NP_INTERNET_DOCUMENT_INT_DOC_NUMBER"/>
+                <field name="Ref"
+                       type="text"
+                       size="32"
+                       readonly="1"
+                       label="VMSHIPMENT_NP_INTERNET_DOCUMENT_REF"/>
+                <field name="TypeDocument"
+                       readonly="1"
+                       type="text"
+                       size="13"
+                       label="VMSHIPMENT_NP_INTERNET_DOCUMENT_TYPE_DOCUMENT"/>
+            </fields>
+
+        </fields>
+    </fieldset>
+
+
+
+    <fieldset name="Recipient_data">
+        <fields name="nova_pochta">
+            <field name="note_Recipient_data" type="note" class="alert alert-info" label="VMSHIPMENT_NP_NOTE_RECIPIENT_DATA"   />
+
+            <field name="FirstName"
+                   type="text"
+                   required="true"
+                   label="VMSHIPMENT_NP_ORDER_EDIT_FIRST_NAME" />
+            <field name="MiddleName"
+                   type="text"
+                   label="VMSHIPMENT_NP_ORDER_EDIT_MIDDLE_NAME" />
+            <field name="LastName"
+                   type="text"
+                   required="true"
+                   label="VMSHIPMENT_NP_ORDER_EDIT_LAST_NAME" />
+            <field name="RecipientsPhone"
+                   required="true"
+                   type="text"
+                   label="VMSHIPMENT_NP_ORDER_EDIT_PHONE" />
+        </fields>
+    </fieldset>
+
+    <fieldset name="Recipient_city">
+        <fields name="nova_pochta">
+            <field name="note_Recipient_city" type="note" class="alert alert-info" label="VMSHIPMENT_NP_CITY_OF_RECIPIENT"   />
+            <!-- Город получателя -->
+            <field name="CityRecipient" type="npcityelement"
+                   class="NpElement"
+                   label=""
+                   onchange="NP_MethodOrderEdit.Change.CitySender(event)"
+            />
+
+            <field name="DateTime" type="calendar"  label="VMSHIPMENT_NP_DATE_OF_RECIPIENT" description="VMSHIPMENT_NP_DATE_OF_RECIPIENT_DESC"
+                   class="input-small"
+                   size="8"
+
+                   required="false"
+                   format="%d.%m.%Y"
+                   default="NOW"
+                   filter="user_utc"
+
+                   showtime="false"
+                   todaybutton="false"
+                   filltable="false"
+                   translateformat="true" />
+
+            <!-- Виды плательщиков услуги доставки -->
+            <field name="PayerType" type="payertype" default="Recipient" label="VMSHIPMENT_PAYER_TYPE" description="VMSHIPMENT_PAYER_TYPE_DESC" />
+
+        </fields>
+    </fieldset>
+
+
+
+
+
+
+
+
+    <!-- Параметры отправления -->
+    <fieldset name="Order_params">
+        <field name="note_Order_params" type="note" class="alert alert-info" label="VMSHIPMENT_NP_ORDER_PARAMS_OPTIONS"   />
+        <fields name="nova_pochta">
+
+            <fields name="VolumeGeneralParams">
+
+                <!-- Единицы измерения размеров Ширина х Высота х Длина  -->
+                <!--<field name="SizeUnits" type="list" default="0.01"
+                       label="VMSHIPMENT_NP_ORDER_PARAMS_DEF_SIZE_UNITS"
+                       description="VMSHIPMENT_NP_ORDER_PARAMS_DEF_SIZE_UNITS_DESC">
+                    <option value="0.001">VMSHIPMENT_NP_ORDER_PARAMS_DEF_SIZE_UNITS_MILLIMETERS</option>
+                    <option value="0.01">VMSHIPMENT_NP_ORDER_PARAMS_DEF_SIZE_UNITS_CENTIMETERS</option>
+                    <option value="1">VMSHIPMENT_NP_ORDER_PARAMS_DEF_SIZE_UNITS_METERS</option>
+                </field>-->
+
+
+            </fields>
+            <!-- ******************************************************************************************************* -->
+
+
+
+            <field name="VolumeGeneralParamsList"
+                   type="repeatable"
+                   icon="list"
+                   default='{"_Volume":[],"_Width":[],"_Length":[],"_Height":[],"_Weight":[],"_VolumeWeight":[]}'
+
+
+                   select="VMSHIPMENT_NP_ORDER_PARAMS_OPTIONS_ALL"
+                   description="VMSHIPMENT_NP_ORDER_PARAMS_OPTIONS_ALL_DESC"
+                   label="cccvvvbb" >
+                <fieldset hidden="true" name="list_templates_modal" repeat="true">
+                    <!-- Объем -->
+                    <field name="_Volume"
+                           type="text"
+                           size="4"
+                           class="sizeField_Volume"
+                           onchange="NP_MethodOrderEdit.On._Volume_change(event)"
+                           description="VMSHIPMENT_NP_ORDER_PARAMS_OPTIONS_VOLUME_GENERAL_VOLUME_DESC"
+                           label="VMSHIPMENT_NP_ORDER_PARAMS_OPTIONS_VOLUME_GENERAL_VOLUME"/>
+
+                    <!-- Ширина   default="0.1"-->
+                    <field name="_Width"
+                           type="text"
+                           onchange="NP_MethodOrderEdit.On.SizeList_change(event)"
+                           size="4"
+                           class="sizeField"
+
+                           description="VMSHIPMENT_NP_ORDER_PARAMS_OPTIONS_VOLUME_GENERAL_WIDTH_DESC"
+                           label="VMSHIPMENT_NP_ORDER_PARAMS_OPTIONS_VOLUME_GENERAL_WIDTH"/>
+                    <!-- Длина    default="0.1"-->
+                    <field name="_Length"
+                           type="text"
+                           size="4"
+                           class="sizeField"
+                           onchange="NP_MethodOrderEdit.On.SizeList_change(event)"
+                           description="VMSHIPMENT_NP_ORDER_PARAMS_OPTIONS_VOLUME_GENERAL_WIDTH_DESC"
+                           label="VMSHIPMENT_NP_ORDER_PARAMS_OPTIONS_VOLUME_GENERAL_LENGTH"/>
+                    <!--   Высота default="0.1"-->
+                    <field name="_Height"
+                           type="text"
+                           size="4"
+                           class="sizeField"
+                           onchange="NP_MethodOrderEdit.On.SizeList_change(event)"
+                           description="VMSHIPMENT_NP_ORDER_PARAMS_OPTIONS_VOLUME_GENERAL_WIDTH_DESC"
+                           label="VMSHIPMENT_NP_ORDER_PARAMS_OPTIONS_VOLUME_GENERAL_HEIGHT"/>
+
+                    <!-- ВЕС -->
+                    <field name="_Weight"
+                           type="text"
+                           size="4"
+                           class="sizeField_Weight"
+                           onchange="NP_MethodOrderEdit.On._Weight_change(event)"
+                           description="VMSHIPMENT_NP_ORDER_PARAMS_OPTIONS_VOLUME_GENERAL_WEIGHT_DESC"
+                           label="VMSHIPMENT_NP_ORDER_PARAMS_OPTIONS_VOLUME_GENERAL_WEIGHT"/>
+
+                    <field name="_VolumeWeight"
+                           type="text"
+                           size="4"
+                           class="sizeField_VolumeWeight"
+                           readonly="1"
+                            description="VMSHIPMENT_NP_ORDER_PARAMS_OPTIONS_VOLUME_GENERAL_WEIGHT_DESC"
+                           label="VMSHIPMENT_NP_ORDER_PARAMS_OPTIONS_VOLUME_GENERAL_VOLUME_GENERAL" />
+
+                </fieldset>
+            </field>
+
+            <!-- ******************************************************************************************************* -->
+            <!-- Загальна вага onchange="NP_MethodOrderEdit.On.Weight_change(event)" -->
+            <field name="Weight" type="text"
+                   default=""
+                   class="validate-validWeight"
+
+                   size="4"
+
+                   label="VMSHIPMENT_NP_ORDER_PARAMS_WEIGHT"
+                   description="VMSHIPMENT_NP_ORDER_PARAMS_WEIGHT_DESC"/>
+            <!-- Вага об’ємна (Ширина х Довжина х Висота/4000) -->
+            <field name="VolumeWeight" type="text"
+                   default=""
+                   readonly="1"
+                    size="4"
+                   label="VMSHIPMENT_NP_ORDER_PARAMS_OPTIONS_VOLUME_GENERAL_VOLUME_GENERAL"
+                   description="VMSHIPMENT_NP_ORDER_PARAMS_OPTIONS_VOLUME_VOLUME_GENERAL_GENERAL_DESC"/>
+
+            <!-- Загальний об'єм відправлення*    -->
+            <field name="VolumeGeneral" type="text"
+
+                   class="validate-validVolumeGeneral"
+                   default=""
+                   size="7"
+                   required="true"
+
+                   label="VMSHIPMENT_NP_ORDER_PARAMS_OPTIONS_TOTAL_VOLUME"
+                   description="VMSHIPMENT_NP_ORDER_PARAMS_OPTIONS_TOTAL_VOLUME_DESC"/>
+            <!-- Кількість місць* -->
+            <field name="SeatsAmount" type="text"
+                   default="1"
+                   size="4"
+                   class="validate-SeatsAmount"
+                   label="VMSHIPMENT_NP_ORDER_PARAMS_OPTIONS_SEATS_AMOUNT"
+                   description="VMSHIPMENT_NP_ORDER_PARAMS_OPTIONS_SEATS_AMOUNT_DESC"/>
+        </fields>
+    </fieldset>
+
+
+
+
+
+    <fieldset name="Recipient_BackwardDelivery">
+        <fields name="nova_pochta">
+            <field name="note_Recipient_city" type="note" class="alert alert-info" label="VMSHIPMENT_NP_ORDER_EDIT_BACKWARD_DELIVERY_DATA_ON"   />
+
+
+            <!-- Обратная доставка -->
+            <fields name="BackwardDeliveryData">
+                <field name="BackwardDeliveryData_On" type="radio" default="1"
+                       label=""
+                       description=""
+                       class="btn-group btn-group-yesno">
+                    <option value="1">JON</option>
+                    <option value="0">JOFF</option>
+                </field>
+                <field name="PayerType" type="payertype" default="Recipient"
+                       label="VMSHIPMENT_NP_ORDER_EDIT_BACKWARD_DELIVERY_PAYER_TYPE"
+                       description="VMSHIPMENT_BACKWARD_DELIVERY_PAYER_TYPE_DESC"
+                       showon="BackwardDeliveryData_On:1"/>
+                <!-- Сумма:  class="Address_flat" -->
+                <field name="RedeliveryString"
+                       type="text"
+                       class="validate-RedeliveryString"
+                       required="true"
+                       label="VMSHIPMENT_NP_ORDER_EDIT_REDELIVERY_STRING"
+                       size="5"
+                       showon="BackwardDeliveryData_On:1"/>
+
+
+                <field name="CargoType" type="list" default="Money"
+                       label="VMSHIPMENT_NP_BACKWARD_DELIVERY_CARGO_TYPE"
+                       showon="BackwardDeliveryData_On:1">
+                    <option value="Money">VMSHIPMENT_NP_BACKWARD_DELIVERY_CARGO_TYPE_MONEY</option>
+                </field>
+            </fields>
+        </fields>
+
+    </fieldset>
+
+    <!-- Способ доставки -->
+    <fieldset name="Recipient_ServiceType"   >
+
+        <fields name="nova_pochta">
+            <field name="note_ServiceType" type="note" class="alert alert-info" label="VMSHIPMENT_NP_RECIPIENT_SERVICE_TYPE"   />
+
+            <field name="ServiceType" type="radio" default="WarehouseWarehouse"
+                   label=""
+                   description=""
+                   class="btn-group btn-group-yesno">
+                <option value="WarehouseWarehouse">VMSHIPMENT_NP_ORDER_EDIT_RECIPIENT_WAREHOUSE_WAREHOUSE</option>
+                <option value="WarehouseDoors">VMSHIPMENT_NP_ORDER_EDIT_RECIPIENT_WAREHOUSE_DOORS</option>
+            </field>
+
+
+            <!-- Склад отправителя -->
+            <field name="RecipientAddress" type="npwarehauselement"
+                   class="element_Warehouse NpElement NpElement_Chosen"
+                   label="VMSHIPMENT_NP_RECIPIENT_ADDRESS"
+                   onchange="NP_MethodCart.Change.WarehousesSender(event);"
+                   showon="ServiceType:WarehouseWarehouse"
+            />
+
+            <field name="Address][street" type="text" label="VMSHIPMENT_NP_RECIPIENT_ADDRESS_STREET" size="20"
+                   class="Address_street"
+                   showon="ServiceType:WarehouseDoors"/>
+
+            <field name="Address][house" type="text" label="VMSHIPMENT_NP_RECIPIENT_ADDRESS_HOUSE" size="5" class="Address_house"
+                   showon="ServiceType:WarehouseDoors"/>
+
+            <field name="Address][flat" type="text" label="VMSHIPMENT_NP_RECIPIENT_ADDRESS_FLAT" size="5" class="Address_flat"
+                   showon="ServiceType:WarehouseDoors"/>
+
+            <field name="Address][streetType" type="Hidden" label="" size="5" class="Address_flat"
+                   showon="ServiceType:WarehouseDoors"/>
+
+            <!--REF Улицы -->
+            <field name="RefStreet"  class="Hidden" type="Hidden" label="" />
+            <field name="RecipientAddressDoors"  class="Hidden" type="text" label="RecipientAddressDoors" />
+
+            <field name="Recipient"  class="hidden" type="Hidden" label="" />
+            <field name="ContactRecipient"  class="hidden" type="Hidden" label="" />
+            <field name="order_number"  class="hidden" type="Hidden" label="" />
+            <field name="id"  class="hidden" type="Hidden" label="" />
+        </fields>
+
+ ы
+    </fieldset>
+
+
+
+
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fieldset name="Recipient_fieldset"  addfieldpath="/plugins/vmshipment/nova_pochta/elements" >
+
+        <fields name="nova_pochta">
+            <!-- Город получателя -->
+
+            <field name="CityRecipient"
+                   type="npcityelement"
+                   required="true"
+                   label="VMSHIPMENT_NP_CITY_OF_RECIPIENT"
+                   onchange="NP_MethodCart.Change.CitySender(event)"
+            />
+            <!-- WarehouseWarehouse -->
+            <!-- WarehouseDoors -->
+            <field name="ServiceType" type="radio" default="WarehouseWarehouse" label="VMSHIPMENT_NP_RECIPIENT_SERVICE_TYPE" description="" class="btn-group btn-group-yesno">
+                <option value="WarehouseWarehouse">VMSHIPMENT_NP_RECIPIENT_WAREHOUSE_WAREHOUSE</option>
+                <option value="WarehouseDoors">VMSHIPMENT_NP_RECIPIENT_WAREHOUSE_DOORS</option>
+            </field>
+
+
+            <!-- Склад отправителя -->
+            <field name="RecipientAddress" type="npwarehauselement" label="VMSHIPMENT_NP_RECIPIENT_ADDRESS"
+                   onchange="NP_MethodCart.Change.WarehousesSender(event);"
+                   showon="ServiceType:WarehouseWarehouse"
+            />
+
+
+
+
+
+        </fields>
+
+    </fieldset>
+
+    <fieldset name="Recipient_Address_fieldset">
+
+
+
+
+        <fields name="nova_pochta">
+
+            <field name="Address][street" type="text" label="VMSHIPMENT_NP_RECIPIENT_ADDRESS_STREET" size="20"
+                   class="Address_street"
+                   showon="ServiceType:WarehouseDoors"/>
+
+
+
+            <field name="Address][house" type="text" label="VMSHIPMENT_NP_RECIPIENT_ADDRESS_HOUSE" size="5" class="Address_house"
+                   showon="ServiceType:WarehouseDoors"/>
+            <field name="Address][flat" type="text" label="VMSHIPMENT_NP_RECIPIENT_ADDRESS_FLAT" size="5" class="Address_flat"
+                   showon="ServiceType:WarehouseDoors"/>
+            <!--REF Улицы -->
+            <field name="RefStreet"  class="hidden" type="Hidden" label="" />
+            <field name="Address][streetType"  class="hidden streetType" type="Hidden" label="" />
+        </fields>
+    </fieldset>
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
